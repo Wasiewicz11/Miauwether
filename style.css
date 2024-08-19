@@ -1,0 +1,78 @@
+@font-face {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 300;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Light.ttf");
+}
+
+body {
+    margin: 0;
+    font-family: "SF Pro Text";
+    background: linear-gradient(to right, #302c7c, #485d7e);
+   
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.location-info, .local-temp {
+    margin: 0;
+    padding: 1px;
+}
+
+.weather-data{
+padding: 10px;
+}
+
+.search-icon {
+    padding: 10px;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.weather-icon, .cat-icon {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.weather-icon-img {
+width: 75vh; 
+height: 75vh; 
+margin-top: -150px;
+object-fit: cover;
+object-position: 25% 25%; 
+}
+
+.cat-icon-img {
+    margin-top: -200px;
+    margin-left: 30px;
+}    
+
+.search-icon {
+    width: 100px;
+    height: 100px;
+}
