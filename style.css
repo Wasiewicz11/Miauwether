@@ -9,7 +9,6 @@ body {
     margin: 0;
     font-family: "SF Pro Text";
     background: linear-gradient(to right, #302c7c, #485d7e);
-   
     color: white;
     height: 100vh;
     display: flex;
@@ -38,9 +37,54 @@ nav {
 padding: 10px;
 }
 
-.search-icon {
-    padding: 10px;
-    margin: 0;
+/* lokalizacja */
+.search-bar {
+    position: fixed;
+    
+    right: 20px;
+    top: 28px;
+   
+    width: 0%;
+    height: 10%;
+    overflow: hidden;
+    transition: width 0.5s ease; /* Animacja wysuwania na szerokość */
+}
+
+.search-bar input {
+    height: 80%;
+    width: 100%;
+
+    border-radius: 15px;
+
+    border: none;
+    outline: none;
+    font-size: 18px;
+
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+.search-bar.active {
+    width: 50%;
+}
+
+.search-icon-button{
+    background-image: url('../assets/loupe.png');
+    background-size: cover; /* Dopasowanie rozmiaru zdjęcia do przycisku */
+    background-repeat: no-repeat; /* Zablokowanie powtarzania zdjęcia */
+    background-position: center; /* Wyrównanie zdjęcia na środku */
+    background-color: transparent;
+    width: 100px; /* Szerokość przycisku */
+    height: 100px; /* Wysokość przycisku */
+    border: none; /* Usunięcie obramowania */
+    padding: 0; /* Usunięcie marginesów wewnętrznych */
+    cursor: pointer; /* Zmiana kursora na wskaźnik */
+    outline: none; /* Usunięcie konturu przy kliknięciu */
+    z-index: 10;
+
+}
+
+.search-icon-button:active {
+    transform: scale(0.98);
 }
 
 .container {
@@ -71,8 +115,3 @@ object-position: 25% 25%;
     margin-top: -200px;
     margin-left: 30px;
 }    
-
-.search-icon {
-    width: 100px;
-    height: 100px;
-}
