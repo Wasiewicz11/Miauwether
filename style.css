@@ -104,9 +104,9 @@ padding: 10px;
 
 
 .weather-icon-img {
-width: 75vh; 
-height: 75vh; 
-margin-top: -150px;
+width: 30vh; 
+height: 30vh; 
+margin-top: -50px;
 object-fit: cover;
 object-position: 25% 25%; 
 }
