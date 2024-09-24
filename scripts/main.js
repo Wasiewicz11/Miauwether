@@ -10,15 +10,25 @@ let apiUrl ="https://api.openweathermap.org/data/2.5/weather?units=metric&lang=e
 let searchBox = document.querySelector(".search-bar input");
 let weather_icon = document.querySelector(".weather-icon-img");
 
-// Variable to store Celsius value
-let cel;
+function checkNight(data){
+
+    const timezoneOffset = data.timezone; // przesunięcie czasu miasta względem UTC w sekundach
+    const currentTime = Math.floor(Date.now() / 1000); // aktualny czas w formacie Unix (sekundy od 1970) w Twojej strefie czasowej
+    const localTime = currentTime + timezoneOffset;
+
+    // Pobranie czasu wschodu i zachodu słońca w formacie Unix (zawsze w UTC)
+    const sunrise = data.sys.sunrise;
+    const sunset = data.sys.sunset;
+
+    return localTime > sunset || localTime < sunrise;
+}    
 
 // Function to check the weather for a city
 async function checkWeather(city) {
     try {
+        
       // Make API call to fetch weather data
       const response = await fetch(`${apiUrl}&q=${city}&appid=${apiKey}`);
-  
       if (!response.ok) {
         throw new Error("Unable to fetch weather data.");
       }
@@ -30,33 +40,27 @@ async function checkWeather(city) {
       document.querySelector(".location-info").innerHTML = data.name;
       const tempCelcius = Math.round(data.main.temp);
       document.querySelector(".local-temp").innerHTML = tempCelcius + "°C";
-  
-      if(tempCelcius < 20){
-        weather_icon.src = "/assets/sun.png";
-    } else {
-          weather_icon.src = "/assets/moon.png";
+
+      const isNight = checkNight(data);
+
+      switch(data.weather[0].main){
+        case "Clear":
+            weather_icon.src = isNight ? "/assets/moon.png" : "/assets/sun.png"
+            break;
+        case "Clouds":
+            if (data.clouds.all > 50) {
+                weather_icon.src = "/assets/clouds.png";    
+            } else {
+                weather_icon.src = isNight ? "/assets/clouds_night.png" : "/assets/clouds_day.png"
+            }
+            break;
+        case "Rain": 
+            weather_icon.src = "/assets/rain.png";
+            break;
+        default:
       }
 
-      /*
-    
-      // Set the weather icon based on weather conditions
-      if (data.weather[0].main === "Clouds") {
-        weather_icon.src = "../images/clouds.png";
-      } else if (data.weather[0].main === "Clear") {
-        weather_icon.src = "../images/clear.png";
-      } else if (data.weather[0].main === "Rain") {
-        weather_icon.src = "../images/rain.png";
-      } else if (data.weather[0].main === "Drizzle") {
-        weather_icon.src = "../images/drizzle.png";
-      } else if (data.weather[0].main === "Mist") {
-        weather_icon.src = "../images/mist.png";
-      }
-  */
-
-  
-      // Store the Celsius value
-      cel = tempCelcius;
-
+      console.log(data.weather[0].main);
     } catch (error) {
       // Display error message and hide weather section
       console.error(error);
