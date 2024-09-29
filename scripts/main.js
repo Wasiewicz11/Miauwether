@@ -3,7 +3,7 @@ document.querySelector('button.search-icon-button').addEventListener('click', fu
 });
 
 // API key and endpoint URL
-let apiKey = "2137";
+let apiKey = "TWÓJ_KLUCZ_API";
 let apiUrl ="https://api.openweathermap.org/data/2.5/weather?units=metric&lang=en";
 
 // DOM elements
